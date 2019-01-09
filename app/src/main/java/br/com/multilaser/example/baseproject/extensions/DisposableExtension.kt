@@ -12,5 +12,6 @@ fun <T> CompositeDisposable.request(request: Observable<T>,
     this.add(request.subscribeOn(Schedulers.io())
         .doOnTerminate { onTerminate() }
         .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
         .subscribe({ onSuccess(it) }, { onError(it) }))
 }
